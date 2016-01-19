@@ -1,0 +1,39 @@
+<h2>Edit webhook setting</h2>
+
+        <%= form_for :webhook_setting, method: :patch,
+                     url: project_webhook_setting_path(@project, @webhook_setting) do |f| %>
+          <p>
+            <%= f.label :url %><br>
+            <%= f.text_field :url %>
+          </p>
+         
+          <p>
+            <%= f.label :description %><br>
+            <%= f.text_area :description %>
+          </p>
+         
+          <p>
+            <%= f.label :send_issue %><br>
+            <%= f.check_box :send_issue %>
+          </p>
+         
+          <p>
+            <%= f.label :send_wiki %><br>
+            <%= f.check_box :send_wiki %>
+          </p>
+         
+          <p>
+            <%= f.label :send_document %><br>
+            <%= f.check_box :send_document %>
+          </p>
+         
+          <p>
+            <%= f.label :send_file %><br>
+            <%= f.check_box :send_file %>
+          </p>
+             
+          <p>
+            <%= f.submit %>
+          </p>
+        <% end %>
+

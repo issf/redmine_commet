@@ -1,0 +1,36 @@
+<h2>Webhook Setting</h2>
+
+    <p>
+      <strong>URL:</strong>
+      <%= @webhook_setting.url %>
+    </p>
+     
+    <p>
+      <strong>description:</strong>
+      <%= @webhook_setting.description %>
+    </p>
+     
+    <p>
+      <strong>Send issue:</strong>
+      <%= @webhook_setting.send_issue %>
+    </p>
+     
+    <p>
+      <strong>Send wiki:</strong>
+      <%= @webhook_setting.send_wiki %>
+    </p>
+     
+    <p>
+      <strong>Send document:</strong>
+      <%= @webhook_setting.send_document %>
+    </p>
+     
+    <p>
+      <strong>Send file:</strong>
+      <%= @webhook_setting.send_file %>
+    </p>
+
+    <p><%= link_to 'Edit', edit_project_webhook_setting_path(@project, @webhook_setting) %></p>
+
+    <p><%= link_to 'Back to list of webhooks', project_webhook_settings_path %></p>
+
