@@ -1,1 +1,25 @@
-<h2>WebhookSettingsController#index</h2>
+<h2>List of Commet webhooks URLs</h2>
+    <table>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>URL</th>
+        <th>Description</th>
+      </tr>
+     
+      <% @webhook_settings.each do |webhook_setting| %>
+        <tr>
+          <td><%= link_to 'Show', project_webhook_setting_path(@project, webhook_setting) %></td>
+          <td><%= link_to 'Edit', edit_project_webhook_setting_path(@project, webhook_setting) %></td>
+          <td><%= link_to 'Delete', project_webhook_setting_path(@project, webhook_setting),
+                  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= webhook_setting.url %></td>
+          <td><%= webhook_setting.description.slice(0, 30) %></td>
+        </tr>
+      <% end %>
+    </table>
+
+   <%= link_to_if_authorized('new',
+       {:action => 'new', :project_id => @project},
+       :class => 'icon icon-add') %>
