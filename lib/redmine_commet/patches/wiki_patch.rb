@@ -21,7 +21,8 @@ module  RedmineCommet
                         createdAt: self.updated_on,
                         type: 'Wiki'
               }
-              res = Net::HTTP.post_form(uri, params)
+              http = Net::HTTP.new(uri.host, uri.port)
+              res = http.post(uri.path, params.to_json, {'Content-Type' =>'application/json'})
               puts res.body
             end
 
