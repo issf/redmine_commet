@@ -24,6 +24,15 @@ Redmine::Plugin.register :redmine_commet do
 end
 
 Rails.application.config.to_prepare do
+
+  # controller
+  # ApplicationController.send(:include, RedmineCommet::Patches::Controllers::ApplicationControllerPatch)
+  IssuesController.send(:include, RedmineCommet::Patches::Controllers::IssuesControllerPatch)
+  WikiController.send(:include, RedmineCommet::Patches::Controllers::WikiControllerPatch)
+  DocumentsController.send(:include, RedmineCommet::Patches::Controllers::DocumentsControllerPatch)
+
+
+  #models
   Attachment.send(:include, RedmineCommet::Patches::AttachmentPatch)
   Issue.send(:include, RedmineCommet::Patches::IssuePatch)
   Project.send(:include, RedmineCommet::Patches::ProjectPatch)
