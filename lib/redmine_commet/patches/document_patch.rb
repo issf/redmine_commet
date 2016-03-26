@@ -13,20 +13,20 @@ module  RedmineCommet
               require 'net/http'
               url = webhook.url
               uri = URI(url)
-              path = "#{Setting.plugin_redmine_commet[:redmine_domain]}#{Rails.application.routes.url_helpers.document_path(self)}"
-              params= {title: self.title,
+              path = "#{Setting.protocol}://#{Setting.host_name}#{Rails.application.routes.url_helpers.document_path(self)}"
+              params= {documentId: path,
+                       title: self.title,
                        body: self.description,
                        url: path ,
-                       createdAt: self.created_on,
+                       createdAt: self.created_on.iso8601,
                        type: 'Document'
               }
               http = Net::HTTP.new(uri.host, uri.port)
               res = http.post(uri.path, params.to_json, {'Content-Type' =>'application/json'})
-              puts res.body
               if res.code == "200"
                 return [true, res.code]
               else
-                return [false, "Status for webhook: #{res.code}"]
+                return [false, "Failed to send the document to the webhook: #{res.code}: #{res.msg}\n#{res.body}"]
               end
             end
             return [true, '']

@@ -21,7 +21,7 @@ module  RedmineCommet
               params = {title: self.filename,
                         body: Base64.encode64(diff.read),
                         url: path,
-                        createdAt: self.created_on,
+                        createdAt: self.created_on.iso8601,
                         type: 'Attachment',
                         container: self.container.class.to_s
               }
