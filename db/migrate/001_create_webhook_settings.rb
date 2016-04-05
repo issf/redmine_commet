@@ -10,6 +10,6 @@ class CreateWebhookSettings < ActiveRecord::Migration
       t.boolean :send_file
     end
 
-    add_foreign_key :webhook_settings, :projects
+    # add_foreign_key :webhook_settings, :projects
   end
 end

@@ -4,6 +4,7 @@ class WebhookSettingsController < ApplicationController
   #before_filter :find_project, :except => [:show, :edit, :update, :destroy]
   #before_filter :authorize
   before_filter :find_project, :authorize
+  before_filter :find_webhook_setting, :only=> [:edit, :show, :update, :destroy]
 
   def index
     @webhook_settings = WebhookSetting.where('project_id' => @project.id)
@@ -20,15 +21,12 @@ class WebhookSettingsController < ApplicationController
   end
 
   def show
-    @webhook_setting = WebhookSetting.find(params[:id])
   end
 
   def edit
-    @webhook_setting = WebhookSetting.find(params[:id])
   end
 
   def update
-    @webhook_setting = WebhookSetting.find(params[:id])
     if @webhook_setting.update(webhook_setting_params)
       redirect_to [@project, @webhook_setting]
     else
@@ -37,9 +35,7 @@ class WebhookSettingsController < ApplicationController
   end
 
   def destroy
-    @webhook_setting = WebhookSetting.find(params[:id])
     @webhook_setting.destroy
-
     redirect_to project_webhook_settings_path
   end
 
@@ -54,5 +50,11 @@ class WebhookSettingsController < ApplicationController
   def webhook_setting_params
     params.require(:webhook_setting)
     .permit(:url, :description, :send_issue, :send_wiki, :send_document, :send_file)
+  end
+
+  def find_webhook_setting
+    @webhook_setting = WebhookSetting.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 end
