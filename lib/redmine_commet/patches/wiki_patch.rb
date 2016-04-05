@@ -10,7 +10,7 @@ module  RedmineCommet
               require 'net/http'
               url = webhook.url
               wiki = self.page.wiki
-              path = "#{Setting.protocol}://#{Setting.host_name}#{Rails.application.routes.url_helpers.project_wiki_page_path(wiki.project, wiki)}"
+              path = "#{Setting.protocol}://#{Setting.host_name}#{Rails.application.routes.url_helpers.project_wiki_page_path(wiki.project, self.page.title)}"
               uri = URI(url)
               params = {documentId: path,
                         title: self.page.wiki.start_page,
